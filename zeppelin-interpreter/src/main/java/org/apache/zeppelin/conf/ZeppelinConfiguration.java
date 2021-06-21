@@ -79,7 +79,7 @@ public class ZeppelinConfiguration {
 
   // private constructor, so that it is singleton.
   private ZeppelinConfiguration(@Nullable String filename) {
-     try {
+    try {
       loadXMLConfig(filename);
     } catch (ConfigurationException e) {
       LOGGER.warn("Failed to load XML configuration, proceeding with a default,for a stacktrace activate the debug log");
@@ -92,16 +92,16 @@ public class ZeppelinConfiguration {
       filename = ZEPPELIN_SITE_XML;
     }
     List<FileLocationStrategy> subs = Arrays.asList(
-      new ZeppelinLocationStrategy(),
-      new ClasspathLocationStrategy());
+            new ZeppelinLocationStrategy(),
+            new ClasspathLocationStrategy());
     FileLocationStrategy strategy = new CombinedLocationStrategy(subs);
     Parameters params = new Parameters();
     FileBasedConfigurationBuilder<XMLConfiguration> xmlbuilder =
-      new FileBasedConfigurationBuilder<XMLConfiguration>(XMLConfiguration.class)
-      .configure(params.xml()
-        .setLocationStrategy(strategy)
-        .setFileName(filename)
-        .setBasePath(File.separator + "conf" + File.separator));
+            new FileBasedConfigurationBuilder<XMLConfiguration>(XMLConfiguration.class)
+                    .configure(params.xml()
+                            .setLocationStrategy(strategy)
+                            .setFileName(filename)
+                            .setBasePath(File.separator + "conf" + File.separator));
     XMLConfiguration xmlConfig = xmlbuilder.getConfiguration();
     List<ImmutableNode> nodes = xmlConfig.getNodeModel().getRootNode().getChildren();
     if (nodes != null && !nodes.isEmpty()) {
@@ -315,9 +315,9 @@ public class ZeppelinConfiguration {
       return path;
     } else {
       return getAbsoluteDir(
-          String.format("%s/%s",
-              getConfDir(),
-              path));
+              String.format("%s/%s",
+                      getConfDir(),
+                      path));
     }
   }
 
@@ -347,9 +347,9 @@ public class ZeppelinConfiguration {
       return path;
     } else {
       return getAbsoluteDir(
-          String.format("%s/%s",
-              getConfDir(),
-              path));
+              String.format("%s/%s",
+                      getConfDir(),
+                      path));
     }
   }
 
@@ -372,19 +372,19 @@ public class ZeppelinConfiguration {
   }
 
   public String getPemKeyFile() {
-      return getString(ConfVars.ZEPPELIN_SSL_PEM_KEY);
+    return getString(ConfVars.ZEPPELIN_SSL_PEM_KEY);
   }
 
   public String getPemKeyPassword() {
-      return getString(ConfVars.ZEPPELIN_SSL_PEM_KEY_PASSWORD);
+    return getString(ConfVars.ZEPPELIN_SSL_PEM_KEY_PASSWORD);
   }
 
   public String getPemCertFile() {
-      return getString(ConfVars.ZEPPELIN_SSL_PEM_CERT);
+    return getString(ConfVars.ZEPPELIN_SSL_PEM_CERT);
   }
 
   public String getPemCAFile() {
-      return getString(ConfVars.ZEPPELIN_SSL_PEM_CA);
+    return getString(ConfVars.ZEPPELIN_SSL_PEM_CA);
   }
 
   public boolean isJMXEnabled() {
@@ -433,7 +433,7 @@ public class ZeppelinConfiguration {
 
   public boolean isRecoveryEnabled() {
     return !getString(ConfVars.ZEPPELIN_RECOVERY_STORAGE_CLASS).equals(
-        "org.apache.zeppelin.interpreter.recovery.NullRecoveryStorage");
+            "org.apache.zeppelin.interpreter.recovery.NullRecoveryStorage");
   }
 
   public String getGCSStorageDir() {
@@ -481,7 +481,7 @@ public class ZeppelinConfiguration {
   }
 
   public String getS3CannedAcl() {
-      return getString(ConfVars.ZEPPELIN_NOTEBOOK_S3_CANNED_ACL);
+    return getString(ConfVars.ZEPPELIN_NOTEBOOK_S3_CANNED_ACL);
   }
 
   public String getOSSBucketName() {
@@ -617,10 +617,10 @@ public class ZeppelinConfiguration {
   }
 
   public boolean isPathWithScheme(String path){
-      try {
-        return StringUtils.isNotBlank(new URI(path).getScheme());
+    try {
+      return StringUtils.isNotBlank(new URI(path).getScheme());
     } catch (URISyntaxException e) {
-        return false;
+      return false;
     }
   }
 
@@ -651,7 +651,7 @@ public class ZeppelinConfiguration {
     String fsConfigDir = getString(ConfVars.ZEPPELIN_CONFIG_FS_DIR);
     if (StringUtils.isBlank(fsConfigDir)) {
       LOGGER.warn("{} is not specified, fall back to local conf directory {}",
-        ConfVars.ZEPPELIN_CONFIG_FS_DIR.varName,  ConfVars.ZEPPELIN_CONF_DIR.varName);
+              ConfVars.ZEPPELIN_CONFIG_FS_DIR.varName,  ConfVars.ZEPPELIN_CONF_DIR.varName);
       if (absolute) {
         return getConfDir();
       } else {
@@ -659,7 +659,7 @@ public class ZeppelinConfiguration {
       }
     }
     if (getString(ConfVars.ZEPPELIN_CONFIG_STORAGE_CLASS)
-                .equals("org.apache.zeppelin.storage.LocalConfigStorage")) {
+            .equals("org.apache.zeppelin.storage.LocalConfigStorage")) {
       // only apply getRelativeDir when it is LocalConfigStorage
       return getAbsoluteDir(fsConfigDir);
     } else {
@@ -726,7 +726,7 @@ public class ZeppelinConfiguration {
   }
 
   public boolean getZeppelinImpersonateSparkProxyUser() {
-      return getBoolean(ConfVars.ZEPPELIN_IMPERSONATE_SPARK_PROXY_USER);
+    return getBoolean(ConfVars.ZEPPELIN_IMPERSONATE_SPARK_PROXY_USER);
   }
 
   public String getZeppelinNotebookGitURL() {
@@ -875,8 +875,8 @@ public class ZeppelinConfiguration {
 
   public Map<String, String> dumpConfigurations(Predicate<String> predicate) {
     return getCompleteConfiguration().entrySet().stream()
-      .filter(e -> predicate.test(e.getKey()))
-      .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+            .filter(e -> predicate.test(e.getKey()))
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
   }
 
   public void save(String location) throws ConfigurationException {
@@ -927,8 +927,8 @@ public class ZeppelinConfiguration {
     ZEPPELIN_INTERPRETER_JUPYTER_KERNELS("zeppelin.interpreter.jupyter.kernels", "python:python,ir:r"),
     ZEPPELIN_INTERPRETER_LOCALREPO("zeppelin.interpreter.localRepo", "local-repo"),
     ZEPPELIN_INTERPRETER_DEP_MVNREPO("zeppelin.interpreter.dep.mvnRepo",
-        "https://repo1.maven.org/maven2/"),
-    ZEPPELIN_INTERPRETER_CONNECT_TIMEOUT("zeppelin.interpreter.connect.timeout", 60000),
+            "https://repo1.maven.org/maven2/"),
+    ZEPPELIN_INTERPRETER_CONNECT_TIMEOUT("zeppelin.interpreter.connect.timeout", 600000),
     ZEPPELIN_INTERPRETER_CONNECTION_POOL_SIZE("zeppelin.interpreter.connection.poolsize", 100),
     ZEPPELIN_INTERPRETER_GROUP_DEFAULT("zeppelin.interpreter.group.default", "spark"),
     ZEPPELIN_INTERPRETER_OUTPUT_LIMIT("zeppelin.interpreter.output.limit", 1024 * 100),
@@ -945,7 +945,7 @@ public class ZeppelinConfiguration {
 
     ZEPPELIN_RECOVERY_DIR("zeppelin.recovery.dir", "recovery"),
     ZEPPELIN_RECOVERY_STORAGE_CLASS("zeppelin.recovery.storage.class",
-        "org.apache.zeppelin.interpreter.recovery.NullRecoveryStorage"),
+            "org.apache.zeppelin.interpreter.recovery.NullRecoveryStorage"),
     ZEPPELIN_PLUGINS_DIR("zeppelin.plugins.dir", "plugins"),
 
     // use specified notebook (id) as homescreen
@@ -978,19 +978,19 @@ public class ZeppelinConfiguration {
     ZEPPELIN_NOTEBOOK_MONGO_URI("zeppelin.notebook.mongo.uri", "mongodb://localhost"),
     ZEPPELIN_NOTEBOOK_MONGO_AUTOIMPORT("zeppelin.notebook.mongo.autoimport", false),
     ZEPPELIN_NOTEBOOK_STORAGE("zeppelin.notebook.storage",
-        "org.apache.zeppelin.notebook.repo.GitNotebookRepo"),
+            "org.apache.zeppelin.notebook.repo.GitNotebookRepo"),
     ZEPPELIN_NOTEBOOK_ONE_WAY_SYNC("zeppelin.notebook.one.way.sync", false),
     // whether by default note is public or private
     ZEPPELIN_NOTEBOOK_PUBLIC("zeppelin.notebook.public", true),
     ZEPPELIN_INTERPRETER_REMOTE_RUNNER("zeppelin.interpreter.remoterunner",
-        System.getProperty("os.name")
-                .startsWith("Windows") ? "bin/interpreter.cmd" : "bin/interpreter.sh"),
+            System.getProperty("os.name")
+                    .startsWith("Windows") ? "bin/interpreter.cmd" : "bin/interpreter.sh"),
     // Decide when new note is created, interpreter settings will be binded automatically or not.
     ZEPPELIN_NOTEBOOK_AUTO_INTERPRETER_BINDING("zeppelin.notebook.autoInterpreterBinding", true),
     ZEPPELIN_CONF_DIR("zeppelin.conf.dir", "conf"),
     ZEPPELIN_CONFIG_FS_DIR("zeppelin.config.fs.dir", ""),
     ZEPPELIN_CONFIG_STORAGE_CLASS("zeppelin.config.storage.class",
-        "org.apache.zeppelin.storage.LocalConfigStorage"),
+            "org.apache.zeppelin.storage.LocalConfigStorage"),
     ZEPPELIN_DEP_LOCALREPO("zeppelin.dep.localrepo", "local-repo"),
     ZEPPELIN_HELIUM_REGISTRY("zeppelin.helium.registry", "helium"),
     ZEPPELIN_HELIUM_NODE_INSTALLER_URL("zeppelin.helium.node.installer.url",
@@ -1032,9 +1032,9 @@ public class ZeppelinConfiguration {
     ZEPPELIN_INTERPRETER_LIFECYCLE_MANAGER_CLASS("zeppelin.interpreter.lifecyclemanager.class",
             NullLifecycleManager.class.getName()),
     ZEPPELIN_INTERPRETER_LIFECYCLE_MANAGER_TIMEOUT_CHECK_INTERVAL(
-        "zeppelin.interpreter.lifecyclemanager.timeout.checkinterval", 60000L),
+            "zeppelin.interpreter.lifecyclemanager.timeout.checkinterval", 60000L),
     ZEPPELIN_INTERPRETER_LIFECYCLE_MANAGER_TIMEOUT_THRESHOLD(
-        "zeppelin.interpreter.lifecyclemanager.timeout.threshold", 3600000L),
+            "zeppelin.interpreter.lifecyclemanager.timeout.threshold", 3600000L),
 
     ZEPPELIN_INTERPRETER_YARN_MONITOR_INTERVAL_SECS(
             "zeppelin.interpreter.yarn.monitor.interval_secs", 10),

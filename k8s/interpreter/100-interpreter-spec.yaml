@@ -64,6 +64,8 @@ spec:
     - name: {{key}}
       value: {{value}}
   {% endfor %}
+    - name: ZEPPELIN_HOME
+      value: /zeppelin
   {% if zeppelin.k8s.interpreter.cores is defined and zeppelin.k8s.interpreter.memory is defined %}
     resources:
       requests:
