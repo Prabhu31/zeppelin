@@ -81,7 +81,6 @@
     <module>python</module>
     <module>lens</module>
     <module>cassandra</module>
-    <module>elasticsearch</module>
     <module>bigquery</module>
     <module>alluxio</module>
     <module>scio</module>
