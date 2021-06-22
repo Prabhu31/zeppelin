@@ -185,7 +185,7 @@
       "title": "Create Dataset/DataFrame via SparkSession",
       "text": "%spark.pyspark\n\n# create DataFrame from python list. It can infer schema for you.\ndf1 \u003d spark.createDataFrame([(1, \"andy\", 20, \"USA\"), (2, \"jeff\", 23, \"China\"), (3, \"james\", 18, \"USA\")]).toDF(\"id\", \"name\", \"age\", \"country\")\ndf1.printSchema()\ndf1.show()\n\n# create DataFrame from pandas dataframe\ndf2 \u003d spark.createDataFrame(df1.toPandas())\ndf2.printSchema()\ndf2.show()\n\n\n\n\n\n\n\n\n\n\n\n\n",
       "user": "anonymous",
-      "dateUpdated": "2021-06-22 15:54:45.799",
+      "dateUpdated": "2021-06-22 16:36:10.433",
       "progress": 100,
       "config": {
         "editorSetting": {
@@ -225,13 +225,13 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "//4040-spark-obdjkv.local.zeppelin-project.org:8080/jobs/job?id\u003d0"
+              "jobUrl": "//4040-spark-rcoiem.local.zeppelin-project.org:8080/jobs/job?id\u003d0"
             },
             {
-              "jobUrl": "//4040-spark-obdjkv.local.zeppelin-project.org:8080/jobs/job?id\u003d1"
+              "jobUrl": "//4040-spark-rcoiem.local.zeppelin-project.org:8080/jobs/job?id\u003d1"
             },
             {
-              "jobUrl": "//4040-spark-obdjkv.local.zeppelin-project.org:8080/jobs/job?id\u003d2"
+              "jobUrl": "//4040-spark-rcoiem.local.zeppelin-project.org:8080/jobs/job?id\u003d2"
             }
           ],
           "interpreterSettingId": "spark"
@@ -241,8 +241,8 @@
       "jobName": "paragraph_1578387700850_1345292725",
       "id": "20180530-101750_1491737301",
       "dateCreated": "2020-01-07 17:01:40.850",
-      "dateStarted": "2021-06-22 15:54:45.801",
-      "dateFinished": "2021-06-22 15:55:05.329",
+      "dateStarted": "2021-06-22 16:36:13.193",
+      "dateFinished": "2021-06-22 16:38:50.545",
       "status": "FINISHED"
     },
     {
